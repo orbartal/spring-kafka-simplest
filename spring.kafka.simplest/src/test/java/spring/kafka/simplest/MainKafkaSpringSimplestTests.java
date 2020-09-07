@@ -11,13 +11,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import spring.kafka.simplest.consumer.MyMessagePublisher;
 import spring.kafka.simplest.producer.MyKafkaSender;
+import spring.kafka.simplest.config.Topics;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MainKafkaSpringSimplestTests {
-
-	private static final String TOPIC = "test";
 
 	@Autowired
 	private MyMessagePublisher myMessagePublisher;
@@ -31,7 +30,7 @@ public class MainKafkaSpringSimplestTests {
     	myMessagePublisher.addSubscriber(subscriber);
 
 	    List<String> items = List.of("a1", "b2", "c3");
-	    items.forEach(i->sender.sendMessage(TOPIC, i));
+	    items.forEach(i->sender.sendMessage(Topics.TOPIC_1, i));
 
 	    Thread.sleep(2000);
 	    Assert.assertTrue(subscriber.consumedElements.containsAll(items));

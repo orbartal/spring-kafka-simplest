@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import spring.kafka.simplest.config.Topics;
+
 @Component
 public class MyKafkaListener {
 
 	@Autowired
 	private MyMessagePublisher myMessagePublisher;
 
-	@KafkaListener(topics = "test")
+	@KafkaListener(topics = Topics.TOPIC_1)
 	public void receiveMessage(String message) {
 		myMessagePublisher.send(message);
 	}
